@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+	<script type='text/javascript' charset='utf-8' src='/kindeditor-4.1.4/kindeditor-min.js'></script>
+	<script type='text/javascript' charset='utf-8' src='/kindeditor-4.1.4/lang/zh_CN.js'></script>
+	<script type='text/javascript'>
+		var editor;
+		KindEditor.ready(function(k){
+			editor=k.create('textarea', {
+				allowImageUpload:false,
+				item:[
+					'fontname','fontsize','|','forecolor','hilitecolor','bold','italic','underline','removeformat','|','justifyleft','justifycenter','justifyright','insertorderedliat','insertunorderedliat','|','emoticons','image','link'
+				]
+			});
+		});
+		//使用create创建了编辑器，第一个是css选择器，设置为textarea，第二个参数是编辑器的编辑选项，通过items来自定义工具栏，‘/’ 表示换行，‘|’表示分隔符
+		/*KindEditor.ready(function(k){
+			window.editor=k.create('#kindeditor');
+		});*/
+	</script>
+</head>
+<body>
+
+<header>
+    <h1><%= title %></h1>
+	<span class='userTip'>
+	<% if(user){ %>
+		你好！<b><%= user.name%></b>
+	<% } %>
+	</span>
+</header>
+<nav>
+    <span><a href='/' title='主页'>home</a></span>
+    <span><a href='/archive' title='存档'>archive</a></span>
+    <span><a href='/tags' title='标签'>tags</a></span>
+    <span><a href='/links' title='友情链接'>links</a></span>
+    <% if(user){ %>
+    <span><a href='/upload' title='上传'>upload</a></span>
+    <span><a href='/post' title='发表'>post</a></span>
+    <span><a href='/logout' title='登出'>logout</a></span>
+    <% }else{ %>
+    <span><a href='/login' title='登陆'>login</a></span>
+    <span><a href='/reg' title='注册'>register</a></span>
+    <% } %>
+    <span><form action='/search' method='get'>
+            <input type='text' name='keyword' placeholder='SEARCH' class='search'/>
+        </form></span>
+</nav>
+<article>
+    <!--内容-->
+    <% if (success) { %>
+    <div><%= success %> </div>
+    <% } %>
+    <% if (error) { %>
+    <div><%= error %> </div>
+    <% } %>
