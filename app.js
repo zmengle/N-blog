@@ -35,14 +35,15 @@ app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({
 	secret:settings.cookieSecret,
-	key:settings.db,
+	// key:settings.db,
 	cookie:{maxAge:1000*60*60*24*30},
-	store:new MongoStore({
-		url: "mongodb://localhost/blog",
+	url:settings.url
+	/*store:new MongoStore({
+		url: settings.url,
 		db:settings.db,
 		host:settings.host,
 		port:settings.port
-	})
+	})*/
 }));
 app.use(passport.initialize());//初始化 Passport
 app.use(app.router);

@@ -26,6 +26,7 @@ module.exports = function(app){
 		});
 	});*/
 	app.get('/', function(req, res){
+		//console.log("开始");
 		//判断是否是第一页
 		var page=req.query.p ? parseInt(req.query.p) : 1;
 		//查询并返回第page页的10篇文章
