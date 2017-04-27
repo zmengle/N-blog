@@ -60,6 +60,18 @@ module.exports = function(app){
 		var name = req.body.name,
 			password = req.body.password,
 			password_re = req.body['password-repeat'];
+		//过滤空格和特殊字符
+		//null
+		//用户名为空
+		if(name=="" || name.trim.isEmpty){
+			req.flash('error', "用户名为空");
+			res.redirect('/reg');//返回注册页
+		}
+		//密码为空
+		if(password=="" || password.trim.isEmpty){
+			req.flash('error', "密码为空");
+			res.redirect('/reg');//返回注册页
+		}
 		//校验两次密码是一致
 		if(password_re != password){
 			req.flash('error', "两次输入的密码不一致！");
